@@ -56,10 +56,11 @@ pipeline {
                         sh 'git status'
                         sh 'git branch'
                         sh 'git config --list'
+                        sh 'git remote -v'
 
                         sh "git remote set-url origin https://${USER}:${PASS}@gitlab.com/amal.bensaied/java-maven-app.git"
                         sh 'git add .'
-                        sh 'git commit -m "ci: version bump"'
+                        sh 'git diff --cached --exit-code || git commit -m "ci: version bump"'
                         sh 'git push origin HEAD:jenkins-jobs'
                     }
                 }
