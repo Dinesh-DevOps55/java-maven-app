@@ -6,14 +6,20 @@ pipeline {
         maven 'Maven'
     }
     stages {
-        stage("init") {
+        stage('increment version') {
             steps {
                 script {
-                    gv = load "script.groovy"
+                    echo 'incrementing app version...'
+                    sh 'mvn build-helper:parse-version versions:set \
+                        -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.minorVersion}.\\\${parsedVersion.nextIncrementalVersion} \
+                        versions:commit'
+                    def matcher = readFile('pom.xml') =~ '<version>(.+)</version>'
+                    def version = matcher[0][1]
+                    env.IMAGE_NAME = "$version-$BUILD_NUMBER"
                 }
             }
         }
-        stage("build jar") {
+        stage('build app') {
             steps {
                 script {
                     gv.buildJar()
