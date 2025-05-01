@@ -11,16 +11,17 @@ pipeline {
         stage ("init") {
             steps{
                script {
-                   gv = load "script.grrovy"
+                   gv = load "script.groovy"
                }
             }
         }
         stage ("build") {
             steps{
                 script {
-                    gv.buildApp
+                    gv.buildApp()
                 }
             }
+        }
         stage ("test") {
             when {
                 expression {
@@ -29,14 +30,14 @@ pipeline {
             }
             steps{
                 script {
-                   gv.testApp
+                   gv.testApp()
                }
             }
         }
         stage ("deploy") {
             steps{
                 script {
-                gv.deployApp
+                gv.deployApp()
                }
             }
         }  
