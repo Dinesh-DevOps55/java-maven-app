@@ -14,7 +14,7 @@ pipeline {
         stage("build jar") {
             steps {
                 script {
-                    gv = buildJar()
+                    gv.buildJar()  // Call buildJar method from the loaded script
                 }
             }
         }
@@ -22,7 +22,7 @@ pipeline {
         stage("build image") {
             steps {
                 script {
-                   gv = buildImage()
+                    gv.buildImage()  // Call buildImage method from the loaded script
                 }
             }
         }
@@ -30,9 +30,9 @@ pipeline {
         stage("deploy") {
             steps {
                 script {
-                    gv = deployApp()
+                    gv.deployApp()  // Call deployApp method from the loaded script
                 }
             }
         }
-    }   
+    }
 }
