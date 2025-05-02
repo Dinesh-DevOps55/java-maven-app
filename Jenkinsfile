@@ -23,7 +23,6 @@ pipeline {
             steps {
                 script {
                    gv = buildImage()
-                    }
                 }
             }
         }
@@ -35,4 +34,5 @@ pipeline {
                 }
             }
         }
-    }
+    }   
+}
