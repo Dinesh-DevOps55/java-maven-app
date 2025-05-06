@@ -16,4 +16,4 @@ def deployApp() {
     echo 'deploying the application..'
 }
 
-return [buildJar: buildJar, buildImage: buildImage, deployApp: deployApp]
+return this
