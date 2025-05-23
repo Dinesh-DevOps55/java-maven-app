@@ -1,5 +1,5 @@
 def gv
-@Library('jenkisn-shared-librabry')
+@Library('8-jenkins-shared-library')
 pipeline {
     agent any
     tools {
