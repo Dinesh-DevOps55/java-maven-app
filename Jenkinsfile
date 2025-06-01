@@ -1,5 +1,8 @@
+#!/user/bin/env groovy
+
+@Library('8-jenkins-shared-library')
 def gv
-@Library('8-jenkins-shared-library') _
+
 pipeline {
     agent any
     tools {
@@ -16,14 +19,14 @@ pipeline {
         stage("build jar") {
             steps {
                 script {
-                    buildJar()
+                    buildJar() // name of the file in REPO 8-jenkins-shared-library > vars
                 }
             }
         }
         stage("build image") {
             steps {
                 script {
-                    buildImage()
+                    buildImage() // name of the file in REPO 8-jenkins-shared-library > vars
                 }
             }
         }
