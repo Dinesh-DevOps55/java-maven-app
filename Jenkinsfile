@@ -19,7 +19,7 @@ pipeline {
         stage("build jar") {
             steps {
                 script {
-                    buildJar() // name of the file in REPO 8-jenkins-shared-library > vars
+                    buildJar() // namee of the file in REPO 8-jenkins-shared-library > vars
                 }
             }
         }
