@@ -4,7 +4,6 @@ def buildJar() {
 }
 
 def buildImage() {
-{
     echo "Building the Docker image..."
     withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
         sh 'docker build -t dineshdocker55/demo-app:jma-2.0 .'
@@ -12,7 +11,9 @@ def buildImage() {
         sh 'docker push dineshdocker55/demo-app:jma-2.0'
     }
 }
+
 def deployApp() {
     echo 'deploying the application..'
 }
+
 return this
