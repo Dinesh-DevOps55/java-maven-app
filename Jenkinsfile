@@ -26,7 +26,7 @@ pipeline {
         stage("build image") {
             steps {
                 script {
-                    buildImage() // name of the file in REPO jenkins-shared-library > vars
+                    buildImage 'dineshdocker55/demo-app:jma-3.0'
                 }
             }
         }
