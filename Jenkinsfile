@@ -23,10 +23,12 @@ pipeline {
                 }
             }
         }
-        stage("build image") {
+        stage("build image and push image") {
             steps {
                 script {
                     buildImage 'dineshdocker55/demo-app:jma-3.0'
+                    dockerLogin()
+                    dockerPush 'dineshdocker55/demo-app:jma-3.0'
                 }
             }
         }
