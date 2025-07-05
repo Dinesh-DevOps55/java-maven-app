@@ -1,10 +1,5 @@
 #!/usr/bin/env groovy
 
-Library identifier: 'jenkins-shared-library@master', retriever: modernSCM(
-[$class: 'GitSCMSource',
-remote: 'https://github.com/Dinesh-DevOps55/jenkins-shared-library.git',
-credentialsId: 'github-credentials'])
-
 def gv
 
 pipeline {
@@ -13,9 +8,17 @@ pipeline {
         maven 'maven-3.9'
     }
     stages {
-        stage("init") {
+        stage("load shared library") {
             steps {
                 script {
+                    library(
+                        identifier: 'jenkins-shared-library@master',
+                        retriever: modernSCM([
+                            $class: 'GitSCMSource',
+                            remote: 'https://github.com/Dinesh-DevOps55/jenkins-shared-library.git',
+                            credentialsId: 'github-credentials'
+                        ])
+                    )
                     gv = load "script.groovy"
                 }
             }
@@ -23,7 +26,7 @@ pipeline {
         stage("build jar") {
             steps {
                 script {
-                    buildJar() // name of the file in REPO jenkins-shared-library > vars
+                    buildJar()
                 }
             }
         }
