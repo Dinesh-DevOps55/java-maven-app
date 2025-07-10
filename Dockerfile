@@ -1,4 +1,4 @@
-# Use Amazon Corretto 8 with Alpine Linux
+# Use Amazon Corretto 8 with Alpine Linux.
 FROM amazoncorretto:8-alpine3.17-jre
 
 # Expose port used by the application
