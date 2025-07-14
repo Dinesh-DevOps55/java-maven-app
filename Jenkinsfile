@@ -37,11 +37,27 @@ pipeline {
       }
     }
   } 
-        stage("Deploy app") {
+        stage("deploy app") {
             steps {
                 script {
                    echo "deploying docker image...."
                 }
+            }
+        }
+        stage("commit version update") {
+            steps {
+            withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASS', usernameVariable: "USER")]) {
+            sh 'git config --global user.email "iamlearningdevops2023@gmail.com"'
+            sh 'git config --global user.name "dinesh"'
+            sh 'git status'
+            sh 'git branch'
+            sh 'git config --list'
+                
+            sh "git remote set-url origin https://${USER}:${PASS}@github.com/Dinesh-DevOps55/java-maven-app.git"
+            sh 'git add .'
+            sh 'git commit -m "ci: version bump"'
+            sh 'git push origin HEAD: jenkins-jobs'
+      }
             }
         }
         }
