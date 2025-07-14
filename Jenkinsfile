@@ -21,7 +21,7 @@ pipeline {
         stage("build app") {
             steps {
                 script {
-                   echo "building the Application...."
+                   echo 'building the Application....'
                     sh 'mvn clean package'
                 }
             }
@@ -29,11 +29,11 @@ pipeline {
 
     stage("build image") {
         steps {
-            echo "building the docker image..."
+            echo 'building the docker image...'
             withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS', usernameVariable: "USER")]) {
-            sh'docker build -t dineshdocker55/demo-app:{$IMAGE_NAME}.'
+            sh"docker build -t dineshdocker55/demo-app:${IMAGE_NAME} ."
             sh 'echo $PASS | docker login -u $USER --password-stdin'
-            sh 'docker push dineshdocker55/demo-app:{$IMAGE_NAME}'
+            sh "docker push dineshdocker55/demo-app:${IMAGE_NAME}"
       }
     }
   } 
